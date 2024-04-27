@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import ErrorPage from './pages/ErrorPage';
+import ResultPage from './pages/ResultPage';
 
 const router = createBrowserRouter([
     {
@@ -23,7 +24,11 @@ const router = createBrowserRouter([
         }, {
           path: '/signup',
           element: <Signup />
-        }
+        },
+        {
+            path: '/result',
+            element: <ResultPage />
+          }
       ]
     },
 ]);
