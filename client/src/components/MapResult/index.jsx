@@ -1,0 +1,1 @@
+// This is componet to show the map search results
