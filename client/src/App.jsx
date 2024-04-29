@@ -8,7 +8,7 @@ import { setContext } from '@apollo/client/link/context';
 import { Outlet } from 'react-router-dom';
 
 import Navigation from './components/Navigation';
-import Footer from './components/Footer';
+import FooterComponent from './components/Footer';
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -42,7 +42,7 @@ function App() {
         <div className="container">
           <Outlet />
         </div>
-        <Footer />
+        <FooterComponent />
       </div>
     </ApolloProvider>
   );
