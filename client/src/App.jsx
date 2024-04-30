@@ -43,7 +43,7 @@ function App() {
       <div className="flex-column justify-flex-start min-100-vh">
         <Navigation />
         
-        <div className="container">
+        <div className="page-container">
           <Outlet />
         </div>
         <FooterComponent />
