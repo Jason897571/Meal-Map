@@ -19,3 +19,20 @@
     height: 80px;
     margin-left: 20px;
 }
+
+.search-bar-background{
+    height: 500px;
+    width: 100%;
+    background-image: url('../public/image/searchBackground.jpg');
+    background-size: cover;
+    
+}
+
+.search-bar-container{
+    padding-top: 10%;
+    width: 25%;
+    margin-left: 35%;
+    
+    
+}
+
