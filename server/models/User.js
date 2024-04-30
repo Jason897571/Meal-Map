@@ -21,10 +21,16 @@ const userSchema = new Schema({
     required: true,
     minlength: 5,
   },
-   favoriteResturants: {
-    type: Schema.Types.ObjectId,
-    ref: 'Resturant'
-   },
+
+   favoriteRestaurants: {
+    type: [String],
+    default: []
+  },
+  
+  reviews: {
+    type: [reviewSchema],
+    default: []
+  }
 });
 
 userSchema.pre('save', async function (next) {
