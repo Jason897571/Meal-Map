@@ -10,6 +10,15 @@ const typeDefs = `
 
     type Review {
         _id: ID
+        username: String
+        locationID: String
+        rating: Int!
+        review: String
+    }
+
+    input ReviewInput {
+        _id: ID
+        username: String
         locationID: String
         rating: Int!
         review: String
@@ -17,7 +26,7 @@ const typeDefs = `
 
     type Auth {
         token: ID!
-        profile: Profile
+        user: User
       }
 
     type Query {
@@ -29,5 +38,9 @@ const typeDefs = `
     type Mutation {
         addUser(username: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth
+        addReview(review: ReviewInput!): Review
+        addFavourite(userId: ID!, locationId: ID!): User
+        removeReview(reviewId: ID!): User
+        removeFavourite(userId: ID!, locationId: ID!): User
     }
 `
