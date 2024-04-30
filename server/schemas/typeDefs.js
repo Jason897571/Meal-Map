@@ -5,7 +5,7 @@ const typeDefs = `
         email: String!
         password: String
         favourites: [ID]
-        reviews: [reviewData]
+        reviews: [reviewInput]
     }
 
     type Review {
