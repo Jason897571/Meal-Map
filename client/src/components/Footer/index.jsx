@@ -1,34 +1,24 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Footer } from "flowbite-react";
+import { BsDribbble, BsFacebook, BsGithub, BsInstagram, BsTwitter } from "react-icons/bs";
 
-const Footer = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
+
+export default function FooterComponent() {
   return (
-    <footer className="w-100 mt-auto bg-secondary p-4">
-      <div className="container text-center mb-5">
-        {location.pathname !== '/' && (
-          <button
-            className="btn btn-dark mb-3"
-            onClick={() => navigate(-1)}
-          >
-            &larr; Go Back
-          </button>
-        )}
-        <h4>
-          Made with{' '}
-          <span
-            className="emoji"
-            role="img"
-            aria-label="heart"
-            aria-hidden="false"
-          >
-            ❤️
-          </span>{' '}
-          by the Tech Thoughts team. This is a test footer, will change later
-        </h4>
+    <Footer container>
+      <div className="w-full">
+       
+        <Footer.Divider />
+        <div className="w-full place-content-center">
+          <Footer.Copyright href="#" by="Team 2" year={2024} />
+          <div className="mt-4 flex justify-center place-content-center">
+            <Footer.Icon className="footer-icon" href="#" icon={BsFacebook} />
+            <Footer.Icon className="footer-icon" href="#" icon={BsInstagram} />
+            <Footer.Icon className="footer-icon" href="#" icon={BsTwitter} />
+            <Footer.Icon className="footer-icon" href="#" icon={BsGithub} />
+            <Footer.Icon className="footer-icon" href="#" icon={BsDribbble} />
+          </div>
+        </div>
       </div>
-    </footer>
+    </Footer>
   );
-};
-
-export default Footer;
+}
