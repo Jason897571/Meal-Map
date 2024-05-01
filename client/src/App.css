@@ -42,3 +42,16 @@
     
 }
 
+.result-container {
+    display: flex;
+    justify-content: center; 
+  }
+  
+  .result-list,
+  .map-list {
+    width: 50%; 
+    margin-left: 10%; 
+    margin-top: 5%;
+  }
+  
+
