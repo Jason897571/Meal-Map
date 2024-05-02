@@ -2,6 +2,11 @@
 import { Button, Checkbox, Label, Modal, TextInput, Navbar } from "flowbite-react";
 import { useState } from "react";
 
+import { useMutation } from '@apollo/client';
+//import { ADD_USER } from '../utils/mutations';
+//import { LOGIN_USER } from '../utils/mutations';
+import Auth from '../../utlis/auth';
+
 const Navigation = () =>{
     const [openSignInModal, setOpenSignInModal] = useState(false);
     const [openSignUpModal, setOpenSignUpModal] = useState(false)
@@ -17,13 +22,13 @@ const Navigation = () =>{
     return(
         <>
             <Navbar fluid rounded className="h-14 bg-gradient-to-r from-purple-500 to-pink-500">
-                <Navbar.Brand className="logo" href="#">
+                <Navbar.Brand className="logo" href="/">
                     <img src="/image/logo.png" className="mr-3 h-10 sm:h-9" alt="Logo" />
                     <span className="self-center whitespace-nowrap text-2xl font-bold dark:text-white">Meal Map</span>
                 </Navbar.Brand>
                 <Navbar.Collapse>
-                    <Navbar.Link className="font-bold text-2xl" href="#">Home</Navbar.Link>
-                    <Navbar.Link className="font-bold text-2xl" href="#">About</Navbar.Link>
+                    <Navbar.Link className="font-bold text-2xl" href="/">Home</Navbar.Link>
+                    <Navbar.Link className="font-bold text-2xl" href="#top-choices">Top Choices</Navbar.Link>
                     <Navbar.Link className="font-bold text-2xl" href="#">Your Review</Navbar.Link>
                     <Navbar.Link className="font-bold text-2xl" href="#">Donation</Navbar.Link>
                     <Navbar.Link className="font-bold text-2xl" href="#">Contact</Navbar.Link>
@@ -46,7 +51,7 @@ const Navigation = () =>{
                         </div>
                         <TextInput
                             id="email"
-                            placeholder="name@company.com"
+                            placeholder="email"
                             value={email}
                             onChange={(event) => setEmail(event.target.value)}
                             required
@@ -56,7 +61,12 @@ const Navigation = () =>{
                         <div className="mb-2 block">
                             <Label htmlFor="password" value="Your password" />
                         </div>
-                        <TextInput id="password" type="password" required />
+                        <TextInput
+                         id="password" 
+                         type="password"
+                         placeholder="******" 
+                         required />
+
                         </div>
                         <div className="flex justify-between">
                         <div className="flex items-center gap-2">

@@ -54,4 +54,19 @@
     margin-top: 5%;
   }
   
+.top-choices-title
+{
+
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 30px;
+    margin-left: 5%;
+}
+
+#top-choices{
+    margin-top: 30px;
+}
+
+
 
