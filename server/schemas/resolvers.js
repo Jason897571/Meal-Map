@@ -1,4 +1,4 @@
-const { User, reviewSchema } = require('../models')
+const User = require('../models')
 const { signToken, AuthenticationError } = require('../utils/Auth');
 
 
