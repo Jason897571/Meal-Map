@@ -11,6 +11,7 @@ const typeDefs = `
         name: String
         location: String
         rating: Float
+        photoUrl: String
       }
     type Review {
         _id: ID
@@ -61,6 +62,6 @@ const typeDefs = `
         removeReview(reviewId: ID!): User
         removeFavourite(userId: ID!, locationId: ID!): User
     }
-`;
+`
 
-module.exports = typeDefs;
+module.exports = typeDefs
