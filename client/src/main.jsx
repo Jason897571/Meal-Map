@@ -6,6 +6,7 @@ import App from './App.jsx';
 import Home from './pages/Home';
 import ErrorPage from './pages/ErrorPage';
 import ResultPage from './pages/ResultPage';
+import Donation from './pages/Donation';
 
 const router = createBrowserRouter([
     {
@@ -20,7 +21,11 @@ const router = createBrowserRouter([
         {
             path: '/result',
             element: <ResultPage />
-          }
+        },
+        {
+          path: '/donation',
+          element: <Donation />
+        }
       ]
     },
 ]);

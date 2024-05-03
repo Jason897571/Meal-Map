@@ -36,3 +36,14 @@ export const QUERY_USER =gql`
   }
 
 `
+
+export const QUERY_CHECKOUT = gql`
+  query donationCheckout($donation: DonationInput){
+    checkout (donation:$donation){
+      session
+    }
+    
+  }
+
+
+`

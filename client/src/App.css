@@ -29,7 +29,7 @@
 .search-bar-background{
     height: 500px;
     width: 100%;
-    background-image: url('../public/image/searchBackground.jpg');
+    background-image: url('/image/searchBackground.jpg');
     background-size: cover;
     
 }
@@ -54,4 +54,85 @@
     margin-top: 5%;
   }
   
+.top-choices-title
+{
+
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 30px;
+    margin-left: 5%;
+}
+
+#top-choices{
+    margin-top: 30px;
+}
+
+
+.donation{
+    height: 1000px;
+}
+
+.donation-container{
+    margin: 10px;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    background-color: #f8f9fa;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.donation-container h1{
+    margin-bottom: 20px;
+}
+
+.donation-container p{
+    margin-bottom: 20px;
+    
+    
+}
+.donation-title{
+
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 30px;
+    margin-bottom: 50px;
+
+}
+
+
+.donation-btn{
+
+    margin-top: 10px;
+    width: 30%;
+    height: 50px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    
+}
+
+.donation-btn:hover{
+    background-color: #14a246;
+    color: #fff;
+}
+
+
+
 

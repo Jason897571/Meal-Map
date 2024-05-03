@@ -191,24 +191,26 @@ const TopResults = ({ results }) => {
     
     
     return(
-        <div className="grid grid-cols-4 gap-4 top-list">
+        <div>
+            <h1 className="top-choices-title">Top Choices</h1>
+            <div id="top-choices" className="grid grid-cols-4 gap-4 top-list">
+                {results.restaurants.map((restaurant, index) => (
 
-            {results.restaurants.map((restaurant, index) => (
-
-                <div key={restaurant.blurhash} className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                    <a href="#">
-                        <img className="rounded-t-lg" src={restaurant.image} alt="" />
-                    </a>
-                    <div className="p-5">
+                    <div key={restaurant.blurhash} className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                         <a href="#">
-                            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{restaurant.name}</h5>
+                            <img className="rounded-t-lg" src={restaurant.image} alt="" />
                         </a>
+                        <div className="p-5">
+                            <a href="#">
+                                <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{restaurant.name}</h5>
+                            </a>
+                        </div>
                     </div>
-                </div>
 
 
-            ))}
-            
+                ))}
+                
+            </div>
         </div>
     )
 }
