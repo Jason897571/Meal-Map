@@ -7,6 +7,11 @@ const typeDefs = `
         favoriteRestaurants: [ID]
         reviews: [Review]
     }
+    type Restaurant {
+        name: String
+        location: String
+        rating: Float
+      }
     type Review {
         _id: ID
         username: String
@@ -28,6 +33,7 @@ const typeDefs = `
     type Query {
         me: User
         user(userId: ID!): User
+        restaurants(latitude: Float!, longitude: Float!): [Restaurant]
     }
     type Mutation { 
         addUser(username: String!, email: String!, password: String!): Auth
