@@ -22,4 +22,4 @@ rad.json
 TestResults.xml
 NodeJsnode_cache
 node_modules
-
+.env

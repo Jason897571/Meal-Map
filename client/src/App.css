@@ -29,7 +29,7 @@
 .search-bar-background{
     height: 500px;
     width: 100%;
-    background-image: url('../public/image/searchBackground.jpg');
+    background-image: url('/image/searchBackground.jpg');
     background-size: cover;
     
 }
