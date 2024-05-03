@@ -21,6 +21,18 @@ const reviewSchema = new Schema({
   
 });
 
+const donationSchema = new Schema({
+  donationDate: {
+    type: Date,
+    default: Date.now,
+  },
+
+  donationAmount: {
+      type: Number,
+      required: true,
+  },
+})
+
 const userSchema = new Schema({
   username: {
     type: String,
@@ -48,7 +60,12 @@ const userSchema = new Schema({
   reviews: {
     type: [reviewSchema],
     default: []
+  },
+  donation:{
+    type: [donationSchema],
+    default: []
   }
+  
 });
 
 userSchema.pre('save', async function (next) {

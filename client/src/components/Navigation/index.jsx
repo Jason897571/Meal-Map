@@ -2,10 +2,16 @@
 import { Button, Checkbox, Label, Modal, TextInput, Navbar } from "flowbite-react";
 import { useState } from "react";
 
+
+
+
 import { useMutation } from '@apollo/client';
 //import { ADD_USER } from '../utils/mutations';
 //import { LOGIN_USER } from '../utils/mutations';
 import Auth from '../../utlis/auth';
+
+
+
 
 const Navigation = () =>{
     const [openSignInModal, setOpenSignInModal] = useState(false);
@@ -30,7 +36,7 @@ const Navigation = () =>{
                     <Navbar.Link className="font-bold text-2xl" href="/">Home</Navbar.Link>
                     <Navbar.Link className="font-bold text-2xl" href="#top-choices">Top Choices</Navbar.Link>
                     <Navbar.Link className="font-bold text-2xl" href="#">Your Review</Navbar.Link>
-                    <Navbar.Link className="font-bold text-2xl" href="#">Donation</Navbar.Link>
+                    <Navbar.Link className="font-bold text-2xl" href="/donation">Donation</Navbar.Link>
                     <Navbar.Link className="font-bold text-2xl" href="#">Contact</Navbar.Link>
                 </Navbar.Collapse>
                 <Navbar.Collapse>

@@ -24,10 +24,28 @@ const typeDefs = `
     type Auth {
         token: ID!
         user: User
-      }
+    }
+    type Donation {
+        _id: ID
+        donationDate: String
+        donationAmount: Int
+        
+    }
+
+    input DonationInput {
+        amount: Int
+        
+    }
+
+    type Checkout{
+        session: ID
+    }
+
+
     type Query {
         me: User
         user(userId: ID!): User
+        checkout(donation: DonationInput): Checkout
     }
     type Mutation { 
         addUser(username: String!, email: String!, password: String!): Auth
