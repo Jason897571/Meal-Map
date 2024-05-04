@@ -11,7 +11,6 @@ const SearchedPlacesPage = () => {
 
   // create state which will hold our search input value
   const [searchInput, setSearchInput] = useState('')
-
   // TODO MAKE SURE THE MUTATION NAMES ARE CORRECT
   // Define useMutation hook for SAVE_PLACE mutation
   // const [savePlace, { error }] = useMutation(SAVE_PLACE)
@@ -26,6 +25,14 @@ const SearchedPlacesPage = () => {
     </>
   )
 
+  const handleFormSubmit = async (event) => {
+    event.preventDefault()
+    setSearchedPlaces({
+      ...searchedPlaces,
+      searchInput,
+    })
+  }
+
   return (
     <>
       <div className="text-light bg-pink-500 p-5">
@@ -34,10 +41,14 @@ const SearchedPlacesPage = () => {
           <h1 className="fs-1 mb-4 uppercase  text-left font-bold">
             Search for Your Cravings!
           </h1>
-          <Form>
+          <Form onSubmit={handleFormSubmit}>
             <Row>
               <Col xs={12} md={8}>
-                <Form.Control id="#link" placeholder="Search for anything..." />
+                <Form.Control
+                  onChange={(e) => setSearchInput(e.target.value)}
+                  id="#link"
+                  placeholder="Search for anything..."
+                />
               </Col>
               <Col xs={12} md={4}>
                 {' '}
