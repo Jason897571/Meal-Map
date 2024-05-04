@@ -143,3 +143,9 @@ h5,
 h6 {
   font-family: 'Roboto Mono', monospace;
 }
+
+.about-us {
+  background-color: #333;
+  color: #fff;
+  margin-bottom: 4rem;
+}
