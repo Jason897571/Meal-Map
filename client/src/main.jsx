@@ -3,11 +3,11 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './output.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-
 import App from './App.jsx'
 import SearchedPlacesPage from './pages/SearchedPlacesPage'
 import ErrorPage from './pages/ErrorPage'
 import ResultPage from './pages/ResultPage'
+import AboutUsPage from './pages/AboutUsPage'
 
 const router = createBrowserRouter([
   {
@@ -22,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: '/result',
         element: <ResultPage />,
+      },
+      {
+        path: '/about-us',
+        element: <AboutUsPage />,
       },
     ],
   },
