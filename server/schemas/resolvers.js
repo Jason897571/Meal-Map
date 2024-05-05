@@ -41,12 +41,12 @@ const resolvers = {
       return { session: session.id }
     },
 
-    restaurants: async (_, { city, type }) => {
+    restaurants: async (_, { city }) => {
       const response = await axios.get(
         `https://maps.googleapis.com/maps/api/place/textsearch/json`,
         {
           params: {
-            query: `${type} in ${city}`,
+            query: `restaurants in ${city}`,
             key: process.env.GOOGLE_API_KEY,
           },
         },
