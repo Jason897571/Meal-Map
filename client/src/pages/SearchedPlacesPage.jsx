@@ -9,9 +9,20 @@ const SearchedPlacesPage = () => {
   const [executeSearch, { loading, data, error }] = useLazyQuery(
     GET_RESTAURANTS_QUERY,
   )
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault()
-    executeSearch({ variables: { city: searchInput, limit: 10 } })
+
+    try {
+      const response = await fetch(
+        `https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants+in+${searchInput}&key=AIzaSyBBkvMgcBIuEySkRQhmrJaUnu9d9MsW_5U`,
+      )
+      const data = await response.json()
+      if (!response.ok) throw new Error(data.error_message || 'Failed to fetch')
+      setPlaces(data.results)
+    } catch (err) {
+      console.error(err)
+      setPlaces([])
+    }
   }
   // this is the no results condition
   const noResults = (
@@ -42,7 +53,10 @@ const SearchedPlacesPage = () => {
               </Col>
               <Col xs={12} md={4}>
                 {' '}
-                <Button variant="dark"> Submit Search</Button>
+                <Button type="submit" variant="dark">
+                  {' '}
+                  Submit Search
+                </Button>
               </Col>
             </Row>
           </Form>{' '}
@@ -60,7 +74,7 @@ const SearchedPlacesPage = () => {
           </h2>
           <Row>
             {data &&
-              data.restaurants.map((place) => (
+              places.map((place) => (
                 <Col md={4} key={place.place_id}>
                   {/* Example place display */}
                   <div>{place.name}</div>
