@@ -45,8 +45,8 @@ export const QUERY_CHECKOUT = gql`
 `
 
 export const GET_RESTAURANTS_QUERY = gql`
-  query GetRestaurants($latitude: Float!, $longitude: Float!) {
-    restaurants(latitude: $latitude, longitude: $longitude) {
+  query GetRestaurants($city: String!, $limit: Int) {
+    restaurants(city: $city, limit: $limit) {
       name
       location
       rating

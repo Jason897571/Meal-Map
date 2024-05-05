@@ -42,14 +42,12 @@ const resolvers = {
       return { session: session.id }
     },
 
-    restaurants: async (_, { latitude, longitude }) => {
-      const response = await axios.getAdapter(
-        `https://maps.googleapis.com/maps/api/place/nearbysearch/json`,
+    restaurants: async (_, { city }) => {
+      const response = await axios.get(
+        `https://maps.googleapis.com/maps/api/place/textsearch/json`,
         {
           params: {
-            location: `${latitude},${longitude}`,
-            readius: 1500,
-            type: 'restaurant',
+            query: `restaurants in ${city}`,
             key: process.env.GOOGLE_API_KEY,
           },
         },
