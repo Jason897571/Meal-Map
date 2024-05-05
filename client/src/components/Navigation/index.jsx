@@ -5,6 +5,7 @@ import {
 import { useState } from 'react'
 import SignInModal from '../SiginInModal/index';
 import SignUpModal from '../SignUpModal';
+import Auth from '../../utlis/auth';
 
 
 
@@ -25,7 +26,6 @@ const Navigation = () => {
     const { name, value } = event.target;
     setFormState(prev => ({ ...prev, [name]: value }));
   };
-
 
   return (
     <>
@@ -61,34 +61,49 @@ const Navigation = () => {
           </Navbar.Link>
         </Navbar.Collapse>
         
-        {/* Navbar content */}
-        <Navbar.Collapse>
-          <Button onClick={() => handleOpenModal('signIn')} gradientDuoTone="greenToBlue">
-            Sign In
-          </Button>
-          <Button onClick={() => handleOpenModal('signUp')} gradientDuoTone="greenToBlue">
-            Sign Up
-          </Button>
-        </Navbar.Collapse>
-        {currentModal === 'signIn' && (
-          <SignInModal
-            isOpen={currentModal === 'signIn'}
-            formState={formState}
-            onChange={handleChange}
-            onClose={handleCloseModal}
-            
-          />
+        {Auth.loggedIn()?(
+          <>
+            <Button onClick={Auth.logout} gradientDuoTone="greenToBlue">
+              Log Out
+            </Button>
+          </>
+
+        ):(
+          <>
+            {/* Navbar Sign in and sign up */}
+            <Navbar.Collapse>
+              <Button onClick={() => handleOpenModal('signIn')} gradientDuoTone="greenToBlue">
+                Sign In
+              </Button>
+              <Button onClick={() => handleOpenModal('signUp')} gradientDuoTone="greenToBlue">
+                Sign Up
+              </Button>
+            </Navbar.Collapse>
+            {currentModal === 'signIn' && (
+              <SignInModal
+                isOpen={currentModal === 'signIn'}
+                formState={formState}
+                onChange={handleChange}
+                onClose={handleCloseModal}
+                
+              />
+            )}
+            {currentModal === 'signUp' && (
+              <SignUpModal
+                isOpen={currentModal === 'signUp'}
+                formState={formState}
+                onChange={handleChange}
+                onClose={handleCloseModal}
+
+              />
+            )}
+
+
+          
+          </>
+
         )}
-        {currentModal === 'signUp' && (
-          <SignUpModal
-            isOpen={currentModal === 'signUp'}
-            formState={formState}
-            onChange={handleChange}
-            onClose={handleCloseModal}
-            error={error}
-            
-          />
-        )}
+        
       </Navbar>
     </>
   );
