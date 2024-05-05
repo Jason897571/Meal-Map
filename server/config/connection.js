@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 mongoose.connect(
-  process.env.MONGODB_URI || 'mongodb+srv://kinggs1314:bjPshMK6YAyeVx3o@meal-map.2udbtgi.mongodb.net/'
+  process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/mealMap'
 );
 
 module.exports = mongoose.connection;
