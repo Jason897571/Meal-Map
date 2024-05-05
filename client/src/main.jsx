@@ -7,6 +7,7 @@ import App from './App.jsx'
 import SearchedPlacesPage from './pages/SearchedPlacesPage'
 import ErrorPage from './pages/ErrorPage'
 import ResultPage from './pages/ResultPage'
+import Donation from './pages/Donation'
 import AboutUsPage from './pages/AboutUsPage'
 
 const router = createBrowserRouter([
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: '/result',
         element: <ResultPage />,
+      },
+      {
+        path: '/donation',
+        element: <Donation />,
       },
       {
         path: '/about-us',
