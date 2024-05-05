@@ -1,28 +1,17 @@
 import { useEffect, useState } from 'react'
 import { Container, Col, Form, Button, Card, Row } from 'react-bootstrap'
 import { useLazyQuery } from '@apollo/client'
-import { GET_RESTAURANTS_QUERY } from '../utlis/queries'
+import { QUERY_RESTAURANTS } from '../utlis/queries'
 
 const SearchedPlacesPage = () => {
   // create state which will hold our search input value
   const [searchInput, setSearchInput] = useState('')
-  const [executeSearch, { loading, data, error }] = useLazyQuery(
-    GET_RESTAURANTS_QUERY,
-  )
-  const handleFormSubmit = async (event) => {
+  const [executeSearch, { loading, data, error }] =
+    useLazyQuery(QUERY_RESTAURANTS)
+  const handleFormSubmit = (event) => {
     event.preventDefault()
-
-    try {
-      const response = await fetch(
-        `https://maps.googleapis.com/maps/api/place/textsearch/json?query=restaurants+in+${searchInput}&key=AIzaSyBBkvMgcBIuEySkRQhmrJaUnu9d9MsW_5U`,
-      )
-      const data = await response.json()
-      if (!response.ok) throw new Error(data.error_message || 'Failed to fetch')
-      setPlaces(data.results)
-    } catch (err) {
-      console.error(err)
-      setPlaces([])
-    }
+    console.log('test')
+    executeSearch({ variables: { city: 'Toronto', limit: 10 } })
   }
   // this is the no results condition
   const noResults = (
@@ -74,7 +63,7 @@ const SearchedPlacesPage = () => {
           </h2>
           <Row>
             {data &&
-              places.map((place) => (
+              data.restaurants.map((place) => (
                 <Col md={4} key={place.place_id}>
                   {/* Example place display */}
                   <div>{place.name}</div>
