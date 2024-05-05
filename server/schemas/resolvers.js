@@ -27,6 +27,7 @@ const resolvers = {
               currency: 'usd',
               product_data: {
                 name: 'Donation',
+                description: "Thank you for your donation",
               },
               unit_amount: args.donation.amount * 100, // Stripe expects amount in cents
             },

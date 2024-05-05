@@ -3,11 +3,13 @@ import { useLazyQuery } from '@apollo/client';
 import { loadStripe } from '@stripe/stripe-js';
 import { QUERY_CHECKOUT } from '../utlis/queries';
 import { useEffect } from 'react';
+import Auth from '../utlis/auth';
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
+
 
 const Donation = () => {
   const [donationAmount, setDonationAmount] = useState(0);
-  const [donationCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
+  const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
 
   const handleInputChange = (e) => {
     setDonationAmount(e.target.value);
@@ -23,16 +25,22 @@ const Donation = () => {
   }, [data]);
 
   const handleSubmit = () => {
-    
-    donationCheckout(
-      {
-        variables: {
-          donation: {
-            amount: parseInt(donationAmount)
+    console.log(Auth.loggedIn())
+    if(Auth.loggedIn){
+      getCheckout(
+        {
+          variables: {
+            donation: {
+              amount: parseInt(donationAmount)
+            }
           }
         }
-      }
-    )
+      )
+    }
+    else{
+      alert("You must be logged in to make a donation!")
+    }
+    
     
   };
 
@@ -49,7 +57,9 @@ const Donation = () => {
             onChange={handleInputChange}
           />
         </div>
-        <button className="donation-btn ring-2 ring-blue-500" onClick={handleSubmit}>Confirm Donation!</button>
+        <button 
+        className="donation-btn ring-2 ring-blue-500" 
+        onClick={handleSubmit}>Confirm Donation!</button>
       </div>
     </div>
   );

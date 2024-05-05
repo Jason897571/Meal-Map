@@ -37,7 +37,7 @@ export const QUERY_USER = gql`
 `
 
 export const QUERY_CHECKOUT = gql`
-  query donationCheckout($donation: DonationInput) {
+  query getCheckout($donation: DonationInput) {
     checkout(donation: $donation) {
       session
     }
