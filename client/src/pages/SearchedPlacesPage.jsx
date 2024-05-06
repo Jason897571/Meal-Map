@@ -1,27 +1,24 @@
 import { useEffect, useState } from 'react'
 import { Container, Col, Form, Button, Card, Row } from 'react-bootstrap'
-import { useMutation } from '@apollo/client'
-
-// TODO uncomment this and make edits of required
-// import { SAVE_PLACE } from '../utils/mutations'
+import { useLazyQuery } from '@apollo/client'
+import { QUERY_RESTAURANTS } from '../utlis/queries'
 
 const SearchedPlacesPage = () => {
-  // create state which will hold/save the users searched place into array
-  const [searchedPlaces, setSearchedPlaces] = useState([])
-
   // create state which will hold our search input value
   const [searchInput, setSearchInput] = useState('')
-
-  // TODO MAKE SURE THE MUTATION NAMES ARE CORRECT
-  // Define useMutation hook for SAVE_PLACE mutation
-  // const [savePlace, { error }] = useMutation(SAVE_PLACE)
-
+  const [executeSearch, { loading, data, error }] =
+    useLazyQuery(QUERY_RESTAURANTS)
+  const handleFormSubmit = (event) => {
+    event.preventDefault()
+    console.log('test')
+    executeSearch({ variables: { city: 'Toronto', limit: 10 } })
+  }
   // this is the no results condition
   const noResults = (
     <>
       {' '}
       <p className="noResult text-3lg capitalize hover:uppercase bg-slate-50">
-        Please search for place to begin!
+        Please search for your city to begin!
       </p>
     </>
   )
@@ -34,14 +31,21 @@ const SearchedPlacesPage = () => {
           <h1 className="fs-1 mb-4 uppercase  text-left font-bold">
             Search for Your Cravings!
           </h1>
-          <Form>
+          <Form onSubmit={handleFormSubmit}>
             <Row>
               <Col xs={12} md={8}>
-                <Form.Control id="#link" placeholder="Search for anything..." />
+                <Form.Control
+                  onChange={(e) => setSearchInput(e.target.value)}
+                  id="#link"
+                  placeholder="Search for anything..."
+                />
               </Col>
               <Col xs={12} md={4}>
                 {' '}
-                <Button variant="dark"> Submit Search</Button>
+                <Button type="submit" variant="dark">
+                  {' '}
+                  Submit Search
+                </Button>
               </Col>
             </Row>
           </Form>{' '}
@@ -50,16 +54,22 @@ const SearchedPlacesPage = () => {
         <Container id="top-choices">
           {/* tereny operator to conditionally render h2 header*/}
           <h2 className="pt-5">
-            {searchedPlaces.length
-              ? `Viewing ${searchedPlaces.length}`
-              : noResults}
+            {loading
+              ? 'Loading...'
+              : error
+                ? `Error: ${error.message}`
+                : data && data.restaurants.length
+                  ? `Viewing ${data.restaurants.length} places`
+                  : noResults}
           </h2>
-          {/* // if user has search a place then display the results in row format
-          and each place will take up 4 columns */}
           <Row>
-            {searchedPlaces.map((place) => {
-              return <Col md={4} key={place.placeId}></Col>
-            })}
+            {data &&
+              data.restaurants.map((place) => (
+                <Col md={4} key={place.place_id}>
+                  {/* Example place display */}
+                  <div>{place.name}</div>
+                </Col>
+              ))}
           </Row>
         </Container>
       </div>

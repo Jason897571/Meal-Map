@@ -15,9 +15,11 @@ module.exports = {
     authMiddleware: function ({ req }) {
         let token = req.body.token || req.query.token || req.header.authorization;
 
-        if (req.headers.authorization) {
+        if (req.header.authorization) {
             token = token.split(' ').pop().trim();
         }
+
+        
 
         if (! token) {
             return req;

@@ -42,26 +42,37 @@ const resolvers = {
       return { session: session.id }
     },
 
-    restaurants: async (_, { latitude, longitude }) => {
-      const response = await axios.getAdapter(
-        `https://maps.googleapis.com/maps/api/place/nearbysearch/json`,
-        {
-          params: {
-            location: `${latitude},${longitude}`,
-            readius: 1500,
-            type: 'restaurant',
-            key: process.env.GOOGLE_API_KEY,
+    restaurants: async (_, { city }) => {
+      
+      
+      try {
+
+        const response = await axios.get(
+          `https://maps.googleapis.com/maps/api/place/textsearch/json`,
+          {
+            params: {
+              query: `restaurants in ${city}`,
+              key: process.env.GOOGLE_API_KEY,
+            },
           },
-        },
-      )
-      return response.data.results.map((place) => ({
-        name: place.name,
-        location: place.vicinity,
-        rating: place.rating,
-        photoUrl: restaurant.photos
-          ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${restaurant.photos[0].photo_reference}&key=${apiKey}`
-          : null,
-      }))
+        )
+
+        if (response.status !== 200) {
+          throw new Error(`Failed to fetch restaurants: ${response.statusText}`)
+        }
+
+        return response.data.results.map((place) => ({
+          name: place.name,
+          location: place.vicinity,
+          rating: place.rating,
+          photoUrl: place.photos
+            ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${place.photos[0].photo_reference}&key=${process.env.GOOGLE_API_KEY}`
+            : null,
+        }))
+      } catch (err) {
+        console.error(err)
+        throw new Error('Error fetching restaurant data')
+      }
     },
   },
   Mutation: {
