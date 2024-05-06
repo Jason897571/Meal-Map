@@ -47,17 +47,16 @@ const Navigation = () => {
           <Navbar.Link className="font-bold text-2xl" href="#top-choices">
             Top Choices
           </Navbar.Link>
-          <Navbar.Link className="font-bold text-2xl" href="#">
-            Your Review
-          </Navbar.Link>
+          {Auth.loggedIn() &&(
+            <Navbar.Link className="font-bold text-2xl" href="#">
+              Your Review
+            </Navbar.Link>
+          )}
           <Navbar.Link className="font-bold text-2xl" href="/about-us">
             About Us
           </Navbar.Link>
           <Navbar.Link className="font-bold text-2xl" href="/donation">
             Donation
-          </Navbar.Link>
-          <Navbar.Link className="font-bold text-2xl" href="#">
-            Contact
           </Navbar.Link>
         </Navbar.Collapse>
         
