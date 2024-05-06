@@ -29,5 +29,8 @@
     "eslint-plugin-react": "^7.34.1",
     "globals": "^15.0.0",
     "prettier": "^3.2.5"
+  },
+  "dependencies": {
+    "@vis.gl/react-google-maps": "^0.10.0"
   }
 }
