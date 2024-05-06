@@ -43,23 +43,33 @@ const resolvers = {
     },
 
     restaurants: async (_, { city }) => {
-      const response = await axios.get(
-        `https://maps.googleapis.com/maps/api/place/textsearch/json`,
-        {
-          params: {
-            query: `restaurants in ${city}`,
-            key: process.env.GOOGLE_API_KEY,
+      try {
+        const response = await axios.get(
+          `https://maps.googleapis.com/maps/api/place/textsearch/json`,
+          {
+            params: {
+              query: `restaurants in ${city}`,
+              key: process.env.GOOGLE_API_KEY,
+            },
           },
-        },
-      )
-      return response.data.results.map((place) => ({
-        name: place.name,
-        location: place.vicinity,
-        rating: place.rating,
-        photoUrl: restaurant.photos
-          ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${restaurant.photos[0].photo_reference}&key=${apiKey}`
-          : null,
-      }))
+        )
+
+        if (response.status !== 200) {
+          throw new Error(`Failed to fetch restaurants: ${response.statusText}`)
+        }
+
+        return response.data.results.map((place) => ({
+          name: place.name,
+          location: place.vicinity,
+          rating: place.rating,
+          photoUrl: place.photos
+            ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${restaurant.photos[0].photo_reference}&key=${apiKey}`
+            : null,
+        }))
+      } catch (err) {
+        console.error(err)
+        throw new Error('Error fetching restaurant data')
+      }
     },
   },
   Mutation: {

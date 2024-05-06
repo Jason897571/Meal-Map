@@ -1,4 +1,4 @@
-import { GET_RESTAURANTS_QUERY } from '../../utlis/queries'
+import { QUERY_RESTAURANTS } from '../../utlis/queries'
 import { useQuery } from '@apollo/client'
 
 const ListResult = ({ latitude, longitude }) => {
