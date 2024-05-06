@@ -47,7 +47,7 @@ const SearchedPlacesPage = () => {
           </Form>{' '}
         </Container>
 
-        <Container>
+        <Container id="top-choices">
           {/* tereny operator to conditionally render h2 header*/}
           <h2 className="pt-5">
             {searchedPlaces.length
