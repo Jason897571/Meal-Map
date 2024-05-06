@@ -43,7 +43,10 @@ const resolvers = {
     },
 
     restaurants: async (_, { city }) => {
+      
+      
       try {
+
         const response = await axios.get(
           `https://maps.googleapis.com/maps/api/place/textsearch/json`,
           {
@@ -63,7 +66,7 @@ const resolvers = {
           location: place.vicinity,
           rating: place.rating,
           photoUrl: place.photos
-            ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${restaurant.photos[0].photo_reference}&key=${apiKey}`
+            ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${place.photos[0].photo_reference}&key=${process.env.GOOGLE_API_KEY}`
             : null,
         }))
       } catch (err) {
