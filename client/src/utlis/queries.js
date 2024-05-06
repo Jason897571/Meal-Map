@@ -47,6 +47,7 @@ export const QUERY_CHECKOUT = gql`
 export const QUERY_RESTAURANTS = gql`
   query GetRestaurants($city: String!, $limit: Int) {
     restaurants(city: $city, limit: $limit) {
+      place_id
       name
       location
       rating

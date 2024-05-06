@@ -67,16 +67,18 @@ const SearchedPlacesPage = () => {
           <div className='row row-cols-1 row-cols-md-2 g-4'>
             
               {data &&
-                data.restaurants.map((place, index) => (
-                  <div className='col' key={index}>
-                    <div className="card" key={index}>
-                      <img src={place.photoUrl} className="card-img-top result-image" alt="Restaurant Photo" />
-                      <div className="card-body">
-                        <h5 className="card-title">{place.name}</h5>
-                        <p className="card-text">Rating: {place.rating}</p>
+                data.restaurants.map((place) => (
+                  <a href={`/result/${place.place_id}`}>
+                    <div className='col' key={place.place_id}>
+                      <div className="card">
+                        <img src={place.photoUrl} className="card-img-top result-image" alt="Restaurant Photo" />
+                        <div className="card-body">
+                          <h5 className="card-title">{place.name}</h5>
+                          <p className="card-text">Rating: {place.rating}</p>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </a>
                 ))}
               
           </div>
