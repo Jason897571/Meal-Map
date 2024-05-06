@@ -13,7 +13,7 @@ const SearchedPlacesPage = () => {
     
     executeSearch({ variables: { city: searchInput, limit: 10 } })
 
-    console.log(data)
+
   }
   // this is the no results condition
   const noResults = (
@@ -65,11 +65,10 @@ const SearchedPlacesPage = () => {
                   : noResults}
           </h2>
           <div className='row row-cols-1 row-cols-md-2 g-4'>
-            
               {data &&
                 data.restaurants.map((place) => (
-                  <a href={`/result/${place.place_id}`}>
-                    <div className='col' key={place.place_id}>
+                  <a href={`/result/${place.place_id}`} key={place.place_id}>
+                    <div className='col'>
                       <div className="card">
                         <img src={place.photoUrl} className="card-img-top result-image" alt="Restaurant Photo" />
                         <div className="card-body">
