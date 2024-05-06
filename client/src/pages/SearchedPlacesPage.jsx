@@ -10,8 +10,10 @@ const SearchedPlacesPage = () => {
     useLazyQuery(QUERY_RESTAURANTS)
   const handleFormSubmit = (event) => {
     event.preventDefault()
-    console.log('test')
-    executeSearch({ variables: { city: 'Toronto', limit: 10 } })
+    
+    executeSearch({ variables: { city: searchInput, limit: 10 } })
+
+    console.log(data)
   }
   // this is the no results condition
   const noResults = (
@@ -62,15 +64,24 @@ const SearchedPlacesPage = () => {
                   ? `Viewing ${data.restaurants.length} places`
                   : noResults}
           </h2>
-          <Row>
-            {data &&
-              data.restaurants.map((place) => (
-                <Col md={4} key={place.place_id}>
-                  {/* Example place display */}
-                  <div>{place.name}</div>
-                </Col>
-              ))}
-          </Row>
+          <div className='row row-cols-1 row-cols-md-2 g-4'>
+            
+              {data &&
+                data.restaurants.map((place) => (
+                  <a href={`/result/${place.place_id}`}>
+                    <div className='col' key={place.place_id}>
+                      <div className="card">
+                        <img src={place.photoUrl} className="card-img-top result-image" alt="Restaurant Photo" />
+                        <div className="card-body">
+                          <h5 className="card-title">{place.name}</h5>
+                          <p className="card-text">Rating: {place.rating}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                ))}
+              
+          </div>
         </Container>
       </div>
     </>

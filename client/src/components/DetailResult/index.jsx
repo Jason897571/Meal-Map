@@ -1,14 +1,7 @@
-import { QUERY_RESTAURANTS } from '../../utlis/queries'
+
 import { useQuery } from '@apollo/client'
 
-const ListResult = ({ latitude, longitude }) => {
-  //TODO replace results with props here
-  const { loading, error, data } = useQuery(GET_RESTAURANTS_QUERY, {
-    variables: { latitude, longitude },
-  })
-
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error: {error.message}</p>
+const ListResult = () => {
 
   return (
     <div className="result-list">

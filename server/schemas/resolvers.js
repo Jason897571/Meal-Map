@@ -60,8 +60,9 @@ const resolvers = {
         if (response.status !== 200) {
           throw new Error(`Failed to fetch restaurants: ${response.statusText}`)
         }
-
+        
         return response.data.results.map((place) => ({
+          place_id:place.place_id,
           name: place.name,
           location: place.vicinity,
           rating: place.rating,

@@ -8,6 +8,7 @@ const typeDefs = `
         reviews: [Review]
     }
     type Restaurant {
+        place_id: String
         name: String
         location: String
         rating: Float

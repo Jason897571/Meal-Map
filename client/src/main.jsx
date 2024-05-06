@@ -22,7 +22,7 @@ const router = createBrowserRouter([
         element: <SearchedPlacesPage />,
       },
       {
-        path: '/result',
+        path: '/result/:id',
         element: <ResultPage />,
       },
       {
