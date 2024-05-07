@@ -28,7 +28,7 @@ const resolvers = {
               currency: 'usd',
               product_data: {
                 name: 'Donation',
-                description: "Thank you for your donation",
+                description: 'Thank you for your donation',
               },
               unit_amount: args.donation.amount * 100, // Stripe expects amount in cents
             },
@@ -44,10 +44,7 @@ const resolvers = {
     },
 
     restaurants: async (_, { city }) => {
-      
-      
       try {
-
         const response = await axios.get(
           `https://maps.googleapis.com/maps/api/place/textsearch/json`,
           {
@@ -61,10 +58,9 @@ const resolvers = {
         if (response.status !== 200) {
           throw new Error(`Failed to fetch restaurants: ${response.statusText}`)
         }
-        
-        
+
         return response.data.results.map((place) => ({
-          place_id:place.place_id,
+          place_id: place.place_id,
           name: place.name,
           location: place.vicinity,
           rating: place.rating,
@@ -102,10 +98,11 @@ const resolvers = {
       return { token, user }
     },
     addFavorite: async (_, { places }, context) => {
+      console.log(places)
       if (context.user) {
         return User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { favorite: {$each: places }} },
+          { $addToSet: { favorite: { $each: places } } },
           {
             new: true,
           },

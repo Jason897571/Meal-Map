@@ -1,5 +1,5 @@
-const {Schema, model } =  require('mongoose');
-const bcrypt = require('bcrypt');
+const { Schema, model } = require('mongoose')
+const bcrypt = require('bcrypt')
 
 const reviewSchema = new Schema({
   username: {
@@ -8,18 +8,36 @@ const reviewSchema = new Schema({
   },
   locationId: {
     type: String,
-    required: true,  
+    required: true,
   },
   rating: {
-      type: Number,
-      required: true,
+    type: Number,
+    required: true,
   },
   review: {
-      type: String,
-      required: false,
-  }
-  
-});
+    type: String,
+    required: false,
+  },
+})
+
+const restaurantSchema = new Schema({
+  place_id: {
+    type: String,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  rating: {
+    type: Number,
+    required: true,
+  },
+  photoUrl: {
+    type: String,
+    required: true,
+  },
+})
 
 const donationSchema = new Schema({
   donationDate: {
@@ -28,8 +46,8 @@ const donationSchema = new Schema({
   },
 
   donationAmount: {
-      type: Number,
-      required: true,
+    type: Number,
+    required: true,
   },
 })
 
@@ -52,35 +70,33 @@ const userSchema = new Schema({
     minlength: 5,
   },
 
-   favorite: {
-    type: [String],
-    default: []
+  favorite: {
+    type: [restaurantSchema],
+    default: [],
   },
-  
+
   reviews: {
     type: [reviewSchema],
-    default: []
+    default: [],
   },
-  donation:{
+  donation: {
     type: [donationSchema],
-    default: []
-  }
-  
-});
+    default: [],
+  },
+})
 
 userSchema.pre('save', async function (next) {
   if (this.isNew || this.isModified('password')) {
-    const saltRounds = 10;
-    this.password = await bcrypt.hash(this.password, saltRounds);
+    const saltRounds = 10
+    this.password = await bcrypt.hash(this.password, saltRounds)
   }
 
-  next();
-});
+  next()
+})
 
 userSchema.methods.isCorrectPassword = async function (password) {
-  return bcrypt.compare(password, this.password);
-};
+  return bcrypt.compare(password, this.password)
+}
 
-const User = model('User', userSchema);
-module.exports = User;
-
+const User = model('User', userSchema)
+module.exports = User
