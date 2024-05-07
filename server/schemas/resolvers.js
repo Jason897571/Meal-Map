@@ -99,7 +99,7 @@ const resolvers = {
       return { token, user }
     },
     addFavorite: async (_, { places }, context) => {
-      console.log(places)
+     
       if (context.user) {
         return User.findOneAndUpdate(
           { _id: context.user._id },
@@ -111,11 +111,12 @@ const resolvers = {
       }
       throw AuthenticationError
     },
-    removeFavorite: async (_, { locationId }, context) => {
+    removeFavorite: async (_, { places }, context) => {
       if (context.user) {
+        const { place_id } = places[0];
         return User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { favourites: locationId } },
+          { $pull: { favourites: {place_id:place_id} } },
           { new: true },
         )
       }

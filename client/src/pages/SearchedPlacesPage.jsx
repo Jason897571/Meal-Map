@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Container, Col, Form, Button, Card, Row } from 'react-bootstrap'
 import { useLazyQuery, useMutation } from '@apollo/client'
 import { QUERY_RESTAURANTS } from '../utlis/queries'
-import { ADD_FAVORITE } from '../utlis/mutations'
+import { ADD_FAVORITE, REMOVE_FAVORITE } from '../utlis/mutations'
 
 const SearchedPlacesPage = () => {
   // create state which will hold our search input value
@@ -12,6 +12,7 @@ const SearchedPlacesPage = () => {
     useLazyQuery(QUERY_RESTAURANTS)
 
   const [addFavorite] = useMutation(ADD_FAVORITE)
+  const [removeFavorite] = useMutation(REMOVE_FAVORITE)
   const handleFormSubmit = (event) => {
     event.preventDefault()
 
@@ -25,14 +26,15 @@ const SearchedPlacesPage = () => {
         [placeId]: !prevState[placeId],
       }
 
+      
+      
+      let restaurants = JSON.parse(localStorage.getItem('restaurants'))
+      let favoriteRestaurant = restaurants.restaurants.find(
+        (restaurant) => restaurant.place_id === placeId,
+      )
+      const { place_id, name, formatted_address, rating, photoUrl } =favoriteRestaurant
       // if it is favorite, call addFavorite mutation
       if (newFavorites[placeId]) {
-        let restaurants = JSON.parse(localStorage.getItem('restaurants'))
-        let favoriteRestaurant = restaurants.restaurants.find(
-          (restaurant) => restaurant.place_id === placeId,
-        )
-        const { place_id, name, formatted_address, rating, photoUrl } =
-          favoriteRestaurant
         addFavorite({
           variables: {
             places: [{ place_id, name, formatted_address, rating, photoUrl }],
@@ -40,7 +42,12 @@ const SearchedPlacesPage = () => {
         })
       } else {
         // if not favorite call removeFavorite mutation
-        // removeFavoriteMutation();
+        removeFavorite({
+          variables: {
+            places:{ place_id, name, formatted_address, rating, photoUrl }
+          },
+        })
+        
       }
 
       return newFavorites
