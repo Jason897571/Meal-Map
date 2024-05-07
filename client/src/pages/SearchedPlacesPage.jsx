@@ -131,7 +131,7 @@ const SearchedPlacesPage = () => {
                     </div>
                     <div className="card-body">
                       <h5 className="card-title">{place.name}</h5>
-                      <p className="card-text">Rating: {place.rating}</p>
+                      <p className="card-text">Rating: {place.rating} / 5</p>
                       <p className="card-address">
                         Address: {place.formatted_address}
                       </p>
