@@ -16,6 +16,7 @@ const resolvers = {
     user: async (_, { userId }) => {
       return User.findOne({ _id: userId })
     },
+    //donation checkout
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin
 
@@ -61,6 +62,7 @@ const resolvers = {
           throw new Error(`Failed to fetch restaurants: ${response.statusText}`)
         }
         
+        
         return response.data.results.map((place) => ({
           place_id:place.place_id,
           name: place.name,
@@ -99,11 +101,11 @@ const resolvers = {
       const token = signToken(user)
       return { token, user }
     },
-    addFavourite: async (_, { locationId }, context) => {
+    addFavorite: async (_, { places }, context) => {
       if (context.user) {
         return User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { favourites: locationId } },
+          { $addToSet: { favorite: {$each: places }} },
           {
             new: true,
           },
@@ -111,7 +113,7 @@ const resolvers = {
       }
       throw AuthenticationError
     },
-    removeFavourite: async (_, { locationId }, context) => {
+    removeFavorite: async (_, { locationId }, context) => {
       if (context.user) {
         return User.findOneAndUpdate(
           { _id: context.user._id },

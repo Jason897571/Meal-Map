@@ -49,7 +49,7 @@ const Navigation = () => {
           </Navbar.Link>
           {Auth.loggedIn() &&(
             <Navbar.Link className="font-bold text-2xl" href="#">
-              Your Review
+              Your Favoriate
             </Navbar.Link>
           )}
           <Navbar.Link className="font-bold text-2xl" href="/about-us">
