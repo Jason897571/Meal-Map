@@ -1,31 +1,30 @@
-import {
-  Button,
-  Navbar,
-} from 'flowbite-react'
+import { Button, Navbar } from 'flowbite-react'
 import { useState } from 'react'
-import SignInModal from '../SiginInModal/index';
-import SignUpModal from '../SignUpModal';
-import Auth from '../../utlis/auth';
-
-
+import SignInModal from '../SiginInModal/index'
+import SignUpModal from '../SignUpModal'
+import Auth from '../../utlis/auth'
 
 const Navigation = () => {
-  const [currentModal, setCurrentModal] = useState(null);
-  const [formState, setFormState] = useState({ email: '', password: '', username: '' });
+  const [currentModal, setCurrentModal] = useState(null)
+  const [formState, setFormState] = useState({
+    email: '',
+    password: '',
+    username: '',
+  })
 
   const handleOpenModal = (modalType) => {
-    setFormState({ email: '', password: '', username: '' });
-    setCurrentModal(modalType);
-  };
+    setFormState({ email: '', password: '', username: '' })
+    setCurrentModal(modalType)
+  }
 
   const handleCloseModal = () => {
-    setCurrentModal(null);
-  };
+    setCurrentModal(null)
+  }
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormState(prev => ({ ...prev, [name]: value }));
-  };
+    const { name, value } = event.target
+    setFormState((prev) => ({ ...prev, [name]: value }))
+  }
 
   return (
     <>
@@ -47,9 +46,9 @@ const Navigation = () => {
           <Navbar.Link className="font-bold text-2xl" href="#top-choices">
             Top Choices
           </Navbar.Link>
-          {Auth.loggedIn() &&(
+          {Auth.loggedIn() && (
             <Navbar.Link className="font-bold text-2xl" href="#">
-              Your Favoriate
+              Your Favourites
             </Navbar.Link>
           )}
           <Navbar.Link className="font-bold text-2xl" href="/about-us">
@@ -59,22 +58,27 @@ const Navigation = () => {
             Donation
           </Navbar.Link>
         </Navbar.Collapse>
-        
-        {Auth.loggedIn()?(
+
+        {Auth.loggedIn() ? (
           <>
             <Button onClick={Auth.logout} gradientDuoTone="greenToBlue">
               Log Out
             </Button>
           </>
-
-        ):(
+        ) : (
           <>
             {/* Navbar Sign in and sign up */}
             <Navbar.Collapse>
-              <Button onClick={() => handleOpenModal('signIn')} gradientDuoTone="greenToBlue">
+              <Button
+                onClick={() => handleOpenModal('signIn')}
+                gradientDuoTone="greenToBlue"
+              >
                 Sign In
               </Button>
-              <Button onClick={() => handleOpenModal('signUp')} gradientDuoTone="greenToBlue">
+              <Button
+                onClick={() => handleOpenModal('signUp')}
+                gradientDuoTone="greenToBlue"
+              >
                 Sign Up
               </Button>
             </Navbar.Collapse>
@@ -84,7 +88,6 @@ const Navigation = () => {
                 formState={formState}
                 onChange={handleChange}
                 onClose={handleCloseModal}
-                
               />
             )}
             {currentModal === 'signUp' && (
@@ -93,20 +96,13 @@ const Navigation = () => {
                 formState={formState}
                 onChange={handleChange}
                 onClose={handleCloseModal}
-
               />
             )}
-
-
-          
           </>
-
         )}
-        
       </Navbar>
     </>
-  );
-};
+  )
+}
 
-export default Navigation;
-
+export default Navigation

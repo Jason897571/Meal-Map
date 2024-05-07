@@ -34,6 +34,7 @@ export const QUERY_USER = gql`
         place_id
         name
         location
+        formatted_address
         rating
         photoUrl
       }
@@ -62,6 +63,7 @@ export const QUERY_RESTAURANTS = gql`
       place_id
       name
       location
+      formatted_address
       rating
       photoUrl
     }

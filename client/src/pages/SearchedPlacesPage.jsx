@@ -2,54 +2,56 @@ import { useEffect, useState } from 'react'
 import { Container, Col, Form, Button, Card, Row } from 'react-bootstrap'
 import { useLazyQuery, useMutation } from '@apollo/client'
 import { QUERY_RESTAURANTS } from '../utlis/queries'
-import {ADD_FAVORITE} from '../utlis/mutations'
+import { ADD_FAVORITE } from '../utlis/mutations'
 
 const SearchedPlacesPage = () => {
   // create state which will hold our search input value
   const [searchInput, setSearchInput] = useState('')
-  const [favorites, setFavorites] = useState({});
+  const [favorites, setFavorites] = useState({})
   const [executeSearch, { loading, data, error }] =
     useLazyQuery(QUERY_RESTAURANTS)
 
-  const [ addFavorite] = useMutation(ADD_FAVORITE)
+  const [addFavorite] = useMutation(ADD_FAVORITE)
   const handleFormSubmit = (event) => {
     event.preventDefault()
-    
+
     executeSearch({ variables: { city: searchInput, limit: 10 } })
-
-
   }
 
-  const handleFavoriteButton = (placeId)=>{
-
-    setFavorites(prevState => {
+  const handleFavoriteButton = (placeId) => {
+    setFavorites((prevState) => {
       const newFavorites = {
         ...prevState,
-        [placeId]: !prevState[placeId]
-      };
-  
+        [placeId]: !prevState[placeId],
+      }
+
       // if it is favorite, call addFavorite mutation
       if (newFavorites[placeId]) {
         let restaurants = JSON.parse(localStorage.getItem('restaurants'))
-        let favoriteRestaurant = restaurants.restaurants.find(restaurant => restaurant.place_id === placeId)
-        const { place_id, name, rating, photoUrl } = favoriteRestaurant;
-        addFavorite({ variables: { places: [{ place_id, name, rating, photoUrl }]} });
+        let favoriteRestaurant = restaurants.restaurants.find(
+          (restaurant) => restaurant.place_id === placeId,
+        )
+        const { place_id, name, formatted_address, rating, photoUrl } =
+          favoriteRestaurant
+        addFavorite({
+          variables: {
+            places: [{ place_id, name, formatted_address, rating, photoUrl }],
+          },
+        })
       } else {
-        // if not favorite call removeFavorite mutation 
+        // if not favorite call removeFavorite mutation
         // removeFavoriteMutation();
       }
-  
-      return newFavorites;
-    });
+
+      return newFavorites
+    })
   }
 
   useEffect(() => {
     if (data) {
-      localStorage.setItem('restaurants', JSON.stringify(data));
+      localStorage.setItem('restaurants', JSON.stringify(data))
     }
-    
-  },[data, favorites])
-
+  }, [data, favorites])
 
   // this is the no results condition
   const noResults = (
@@ -100,28 +102,43 @@ const SearchedPlacesPage = () => {
                   ? `Viewing ${data.restaurants.length} places`
                   : noResults}
           </h2>
-          <div className='row row-cols-1 row-cols-md-2 g-4'>
-              {data &&
-                data.restaurants.map((place) => (
-                 
-                    <div className='col' key={place.place_id}>
-                      <div className="card">
-                        <img src={place.photoUrl} className="card-img-top result-image" alt="Restaurant Photo" />
-                        <div className="icon-container">
-                          <button className="favorite-btn" id="favorite-btn" onClick={()=>handleFavoriteButton(place.place_id)}>
-                            <img className='favorite-icon' src={favorites[place.place_id] ? "/image/heart.png" : "/image/love.png"} alt="" />
-                          </button>
-    
-                        </div>
-                        <div className="card-body">
-                          <h5 className="card-title">{place.name}</h5>
-                          <p className="card-text">Rating: {place.rating}</p>
-                        </div>
-                      </div>
+          <div className="row row-cols-1 row-cols-md-2 g-4">
+            {data &&
+              data.restaurants.map((place) => (
+                <div className="col" key={place.place_id}>
+                  <div className="card">
+                    <img
+                      src={place.photoUrl}
+                      className="card-img-top result-image"
+                      alt="Restaurant Photo"
+                    />
+                    <div className="icon-container">
+                      <button
+                        className="favorite-btn"
+                        id="favorite-btn"
+                        onClick={() => handleFavoriteButton(place.place_id)}
+                      >
+                        <img
+                          className="favorite-icon"
+                          src={
+                            favorites[place.place_id]
+                              ? '/image/heart.png'
+                              : '/image/love.png'
+                          }
+                          alt=""
+                        />
+                      </button>
                     </div>
-                 
-                ))}
-              
+                    <div className="card-body">
+                      <h5 className="card-title">{place.name}</h5>
+                      <p className="card-text">Rating: {place.rating} / 5</p>
+                      <p className="card-address">
+                        Address: {place.formatted_address}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
           </div>
         </Container>
       </div>

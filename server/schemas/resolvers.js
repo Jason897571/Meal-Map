@@ -63,6 +63,7 @@ const resolvers = {
           place_id: place.place_id,
           name: place.name,
           location: place.vicinity,
+          formatted_address: place.formatted_address,
           rating: place.rating,
           photoUrl: place.photos
             ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${place.photos[0].photo_reference}&key=${process.env.GOOGLE_API_KEY}`
