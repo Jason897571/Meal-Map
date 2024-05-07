@@ -35,7 +35,7 @@ const Navigation = () => {
       >
         <Navbar.Brand className="logo" href="/">
           <img src="/image/logo.png" className="mr-3 h-10 sm:h-9" alt="Logo" />
-          <span className="self-center whitespace-nowrap text-2xl font-bold dark:text-white">
+          <span className="appName self-center whitespace-nowrap text-2xl font-bold dark:text-white">
             Meal Map
           </span>
         </Navbar.Brand>
