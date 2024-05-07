@@ -26,6 +26,10 @@
   margin-left: 20px;
 }
 
+.appName {
+  color: rgb(132, 219, 132);
+}
+
 .search-bar-background {
   height: 500px;
   width: 100%;
@@ -150,31 +154,28 @@ h6 {
   margin-bottom: 4rem;
 }
 
-.result-image{
-  height: 500px
+.result-image {
+  height: 500px;
 }
 
 .icon-container {
   position: absolute;
   top: 0;
   right: 0;
-  z-index: 1; 
+  z-index: 1;
   padding: 0.5rem;
   background-color: #e7efea05;
 }
 
-.favorite-icon{
+.favorite-icon {
   width: 24px;
   height: 24px;
   cursor: pointer;
 }
 
-.favorite-title{
+.favorite-title {
   font-size: 36px;
   font-weight: bold;
   color: #333;
-  margin: 20px 30% ;
-  
+  margin: 20px 30%;
 }
-
-
