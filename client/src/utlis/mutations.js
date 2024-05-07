@@ -26,20 +26,36 @@ export const ADD_USER = gql`
 `;
 
 
-export const ADD_FAVORITE_RESTAURANT = gql`
-  mutation AddFavoriteRestaurant($restaurantId: String!) {
-    addFavoriteRestaurant(restaurantId: $restaurantId) {
-      id
-      favoriteRestaurants
+export const ADD_FAVORITE = gql`
+  mutation AddFavorite($places: [RestaurantInput]!) {
+    addFavorite(places: $places) {
+      _id
+      username
+      email
+      favorite {
+        place_id
+        name
+        location
+        rating
+        photoUrl
+      }
     }
   }
 `;
 
-export const REMOVE_FAVORITE_RESTAURANT = gql`
-  mutation RemoveFavoriteRestaurant($restaurantId: String!) {
-    removeFavoriteRestaurant(restaurantId: $restaurantId) {
-      id
-      favoriteRestaurants
+export const REMOVE_FAVORITE = gql`
+  mutation RemoveFavorite($places: [RestaurantInput]!) {
+    removeFavorite(places: $places) {
+      _id
+      username
+      email
+      favorite {
+        place_id
+        name
+        location
+        rating
+        photoUrl
+      }
     }
   }
 `;

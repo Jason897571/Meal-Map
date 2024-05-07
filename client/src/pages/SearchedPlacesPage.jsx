@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Container, Col, Form, Button, Card, Row } from 'react-bootstrap'
-import { useLazyQuery } from '@apollo/client'
+import { useLazyQuery, useMutation } from '@apollo/client'
 import { QUERY_RESTAURANTS } from '../utlis/queries'
+import {ADD_FAVORITE} from '../utlis/mutations'
 
 const SearchedPlacesPage = () => {
   // create state which will hold our search input value
@@ -9,6 +10,8 @@ const SearchedPlacesPage = () => {
   const [favorites, setFavorites] = useState({});
   const [executeSearch, { loading, data, error }] =
     useLazyQuery(QUERY_RESTAURANTS)
+
+  const [ addFavorite] = useMutation(ADD_FAVORITE)
   const handleFormSubmit = (event) => {
     event.preventDefault()
     
@@ -19,12 +22,33 @@ const SearchedPlacesPage = () => {
 
   const handleFavoriteButton = (placeId)=>{
 
-    setFavorites(prevState => ({
-      ...prevState,
-      [placeId]: !prevState[placeId]
-    }));
-    
+    setFavorites(prevState => {
+      const newFavorites = {
+        ...prevState,
+        [placeId]: !prevState[placeId]
+      };
+  
+      // if it is favorite, call addFavorite mutation
+      if (newFavorites[placeId]) {
+        let restaurants = JSON.parse(localStorage.getItem('restaurants'))
+        let favoriteRestaurant = restaurants.restaurants.find(restaurant => restaurant.place_id === placeId)
+        const { place_id, name, rating, photoUrl } = favoriteRestaurant;
+        addFavorite({ variables: { places: [{ place_id, name, rating, photoUrl }]} });
+      } else {
+        // if not favorite call removeFavorite mutation 
+        // removeFavoriteMutation();
+      }
+  
+      return newFavorites;
+    });
   }
+
+  useEffect(() => {
+    if (data) {
+      localStorage.setItem('restaurants', JSON.stringify(data));
+    }
+    
+  },[data, favorites])
 
 
   // this is the no results condition

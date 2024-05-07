@@ -4,7 +4,7 @@ const typeDefs = `
         username: String!
         email: String!
         password: String
-        favoriteRestaurants: [ID]
+        favorite: [Restaurant]
         reviews: [Review]
     }
     type Restaurant {
@@ -14,6 +14,14 @@ const typeDefs = `
         rating: Float
         photoUrl: String
       }
+    input RestaurantInput {
+    place_id: String
+    name: String
+    location: String
+    rating: Float
+    photoUrl: String
+    }
+
     type Review {
         _id: ID
         username: String
@@ -58,10 +66,10 @@ const typeDefs = `
     type Mutation { 
         addUser(username: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth
-        addReview(review: ReviewInput!): Review
-        addFavourite(userId: ID!, locationId: ID!): User
+        addReview(review: ReviewInput!): User
+        addFavorite(places: [RestaurantInput]!): User
         removeReview(reviewId: ID!): User
-        removeFavourite(userId: ID!, locationId: ID!): User
+        removeFavorite(places: [RestaurantInput]!): User
     }
 `
 

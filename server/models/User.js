@@ -52,7 +52,7 @@ const userSchema = new Schema({
     minlength: 5,
   },
 
-   favoriteRestaurants: {
+   favorite: {
     type: [String],
     default: []
   },
