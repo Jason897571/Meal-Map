@@ -50,7 +50,7 @@ const resolvers = {
           {
             params: {
               query: `restaurants in ${city}`,
-              key: 'AIzaSyBBkvMgcBIuEySkRQhmrJaUnu9d9MsW_5U',
+              key: process.env.GOOGLE_API_KEY,
             },
           },
         )
@@ -66,7 +66,7 @@ const resolvers = {
           formatted_address: place.formatted_address,
           rating: place.rating,
           photoUrl: place.photos
-            ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${place.photos[0].photo_reference}&key=AIzaSyBBkvMgcBIuEySkRQhmrJaUnu9d9MsW_5U`
+            ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${place.photos[0].photo_reference}&key=${process.env.GOOGLE_API_KEY}`
             : null,
         }))
       } catch (err) {
