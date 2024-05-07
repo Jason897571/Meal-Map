@@ -6,6 +6,7 @@ import { QUERY_RESTAURANTS } from '../utlis/queries'
 const SearchedPlacesPage = () => {
   // create state which will hold our search input value
   const [searchInput, setSearchInput] = useState('')
+  const [favorites, setFavorites] = useState({});
   const [executeSearch, { loading, data, error }] =
     useLazyQuery(QUERY_RESTAURANTS)
   const handleFormSubmit = (event) => {
@@ -15,6 +16,17 @@ const SearchedPlacesPage = () => {
 
 
   }
+
+  const handleFavoriteButton = (placeId)=>{
+
+    setFavorites(prevState => ({
+      ...prevState,
+      [placeId]: !prevState[placeId]
+    }));
+    
+  }
+
+
   // this is the no results condition
   const noResults = (
     <>
@@ -67,17 +79,23 @@ const SearchedPlacesPage = () => {
           <div className='row row-cols-1 row-cols-md-2 g-4'>
               {data &&
                 data.restaurants.map((place) => (
-                  <a href={`/result/${place.place_id}`} key={place.place_id}>
-                    <div className='col'>
+                 
+                    <div className='col' key={place.place_id}>
                       <div className="card">
                         <img src={place.photoUrl} className="card-img-top result-image" alt="Restaurant Photo" />
+                        <div className="icon-container">
+                          <button className="favorite-btn" id="favorite-btn" onClick={()=>handleFavoriteButton(place.place_id)}>
+                            <img className='favorite-icon' src={favorites[place.place_id] ? "/image/heart.png" : "/image/love.png"} alt="" />
+                          </button>
+    
+                        </div>
                         <div className="card-body">
                           <h5 className="card-title">{place.name}</h5>
                           <p className="card-text">Rating: {place.rating}</p>
                         </div>
                       </div>
                     </div>
-                  </a>
+                 
                 ))}
               
           </div>
