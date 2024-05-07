@@ -47,7 +47,7 @@ const Navigation = () => {
             Top Choices
           </Navbar.Link>
           {Auth.loggedIn() && (
-            <Navbar.Link className="font-bold text-2xl" href="#">
+            <Navbar.Link className="font-bold text-2xl" href="/your-favorite">
               Your Favourites
             </Navbar.Link>
           )}

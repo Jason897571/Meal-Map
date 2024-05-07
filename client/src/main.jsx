@@ -9,7 +9,7 @@ import ErrorPage from './pages/ErrorPage'
 import ResultPage from './pages/ResultPage'
 import Donation from './pages/Donation'
 import AboutUsPage from './pages/AboutUsPage'
-import YourReviewsPage from './pages/YourReviewsPage'
+import YourFavoritePage from './pages/YourFavoritePage'
 
 const router = createBrowserRouter([
   {
@@ -34,8 +34,8 @@ const router = createBrowserRouter([
         element: <AboutUsPage />,
       },
       {
-        path: '/your-reviews',
-        element: <YourReviewsPage />,
+        path: '/your-favorite',
+        element: <YourFavoritePage />,
       }
     ],
   },
