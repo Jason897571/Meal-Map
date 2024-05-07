@@ -29,6 +29,10 @@ const restaurantSchema = new Schema({
     type: String,
     required: true,
   },
+  formatted_address: {
+    type: String,
+    required: true,
+  },
   rating: {
     type: Number,
     required: true,

@@ -11,6 +11,7 @@ const typeDefs = `
         place_id: String
         name: String
         location: String
+        formatted_address: String
         rating: Float
         photoUrl: String
       }
@@ -18,6 +19,7 @@ const typeDefs = `
     place_id: String
     name: String
     location: String
+    formatted_address: String
     rating: Float
     photoUrl: String
     }
